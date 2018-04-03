@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cnk.qiye.mapper.CPhotoCategoryMapper" >
+
+  <resultMap id="BaseResultMap" type="com.cnk.qiye.pojo.CPhotoCategory" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="photo_category_name" property="photoCategoryName" jdbcType="VARCHAR" />
+    <result column="photo_category_desc" property="photoCategoryDesc" jdbcType="VARCHAR" />
+    <result column="photo_category_status" property="photoCategoryStatus" jdbcType="BIT" />
+    <result column="photo_category_sort" property="photoCategorySort" jdbcType="INTEGER" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, photo_category_name, photo_category_desc, photo_category_status, photo_category_sort, 
+    created_time, update_time, created_by
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_photo_category
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from c_photo_category
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.cnk.qiye.pojo.CPhotoCategory" >
+    insert into c_photo_category (id, photo_category_name, photo_category_desc, 
+      photo_category_status, photo_category_sort, created_time, 
+      update_time, created_by)
+    values (#{id,jdbcType=BIGINT}, #{photoCategoryName,jdbcType=VARCHAR}, #{photoCategoryDesc,jdbcType=VARCHAR}, 
+      #{photoCategoryStatus,jdbcType=BIT}, #{photoCategorySort,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.cnk.qiye.pojo.CPhotoCategory" >
+    update c_photo_category
+    set photo_category_name = #{photoCategoryName,jdbcType=VARCHAR},
+      photo_category_desc = #{photoCategoryDesc,jdbcType=VARCHAR},
+      photo_category_status = #{photoCategoryStatus,jdbcType=BIT},
+      photo_category_sort = #{photoCategorySort,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

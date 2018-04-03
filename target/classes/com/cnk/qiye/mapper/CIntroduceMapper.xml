@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cnk.qiye.mapper.CIntroduceMapper" >
+
+  <resultMap id="BaseResultMap" type="com.cnk.qiye.pojo.CIntroduce" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="introduce_small" property="introduceSmall" jdbcType="VARCHAR" />
+    <result column="introduce_big" property="introduceBig" jdbcType="VARCHAR" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, introduce_small, introduce_big, created_time, update_time
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_introduce
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from c_introduce
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.cnk.qiye.pojo.CIntroduce" >
+    insert into c_introduce (id, introduce_small, introduce_big, 
+      created_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{introduceSmall,jdbcType=VARCHAR}, #{introduceBig,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.cnk.qiye.pojo.CIntroduce" >
+    update c_introduce
+    set introduce_small = #{introduceSmall,jdbcType=VARCHAR},
+      introduce_big = #{introduceBig,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

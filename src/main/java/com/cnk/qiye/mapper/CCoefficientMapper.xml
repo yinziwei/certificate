@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cnk.qiye.mapper.CCoefficientMapper" >
+
+  <resultMap id="BaseResultMap" type="com.cnk.qiye.pojo.CCoefficient" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="coefficient_type" property="coefficientType" jdbcType="INTEGER" />
+    <result column="coefficient_desc" property="coefficientDesc" jdbcType="VARCHAR" />
+    <result column="coefficient_status" property="coefficientStatus" jdbcType="TINYINT" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, coefficient_type, coefficient_desc, coefficient_status, created_time
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_coefficient
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from c_coefficient
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.cnk.qiye.pojo.CCoefficient" >
+    insert into c_coefficient (id, coefficient_type, coefficient_desc, 
+      coefficient_status, created_time)
+    values (#{id,jdbcType=BIGINT}, #{coefficientType,jdbcType=INTEGER}, #{coefficientDesc,jdbcType=VARCHAR}, 
+      #{coefficientStatus,jdbcType=TINYINT}, #{createdTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.cnk.qiye.pojo.CCoefficient" >
+    update c_coefficient
+    set coefficient_type = #{coefficientType,jdbcType=INTEGER},
+      coefficient_desc = #{coefficientDesc,jdbcType=VARCHAR},
+      coefficient_status = #{coefficientStatus,jdbcType=TINYINT},
+      created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

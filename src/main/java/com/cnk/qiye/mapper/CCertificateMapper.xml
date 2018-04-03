@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cnk.qiye.mapper.CCertificateMapper" >
+
+  <resultMap id="BaseResultMap" type="com.cnk.qiye.pojo.CCertificate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="certificate_id" property="certificateId" jdbcType="BIGINT" />
+    <result column="certificate_title" property="certificateTitle" jdbcType="VARCHAR" />
+    <result column="certificate_introduce_id" property="certificateIntroduceId" jdbcType="BIGINT" />
+    <result column="certificate_hot_id" property="certificateHotId" jdbcType="BIGINT" />
+    <result column="certificate_coefficient_id" property="certificateCoefficientId" jdbcType="BIGINT" />
+    <result column="certificate_photo" property="certificatePhoto" jdbcType="VARCHAR" />
+    <result column="certificate_colloge_id" property="certificateCollogeId" jdbcType="BIGINT" />
+    <result column="certificate_major_id" property="certificateMajorId" jdbcType="BIGINT" />
+    <result column="certificate_search" property="certificateSearch" jdbcType="VARCHAR" />
+    <result column="certificate_status" property="certificateStatus" jdbcType="BIT" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, certificate_id, certificate_title, certificate_introduce_id, certificate_hot_id, 
+    certificate_coefficient_id, certificate_photo, certificate_colloge_id, certificate_major_id, 
+    certificate_search, certificate_status, created_time, update_time, created_by, update_by
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_certificate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from c_certificate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.cnk.qiye.pojo.CCertificate" >
+    insert into c_certificate (id, certificate_id, certificate_title, 
+      certificate_introduce_id, certificate_hot_id, 
+      certificate_coefficient_id, certificate_photo, 
+      certificate_colloge_id, certificate_major_id, 
+      certificate_search, certificate_status, created_time, 
+      update_time, created_by, update_by
+      )
+    values (#{id,jdbcType=BIGINT}, #{certificateId,jdbcType=BIGINT}, #{certificateTitle,jdbcType=VARCHAR}, 
+      #{certificateIntroduceId,jdbcType=BIGINT}, #{certificateHotId,jdbcType=BIGINT}, 
+      #{certificateCoefficientId,jdbcType=BIGINT}, #{certificatePhoto,jdbcType=VARCHAR}, 
+      #{certificateCollogeId,jdbcType=BIGINT}, #{certificateMajorId,jdbcType=BIGINT}, 
+      #{certificateSearch,jdbcType=VARCHAR}, #{certificateStatus,jdbcType=BIT}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}, #{updateBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.cnk.qiye.pojo.CCertificate" >
+    update c_certificate
+    set certificate_id = #{certificateId,jdbcType=BIGINT},
+      certificate_title = #{certificateTitle,jdbcType=VARCHAR},
+      certificate_introduce_id = #{certificateIntroduceId,jdbcType=BIGINT},
+      certificate_hot_id = #{certificateHotId,jdbcType=BIGINT},
+      certificate_coefficient_id = #{certificateCoefficientId,jdbcType=BIGINT},
+      certificate_photo = #{certificatePhoto,jdbcType=VARCHAR},
+      certificate_colloge_id = #{certificateCollogeId,jdbcType=BIGINT},
+      certificate_major_id = #{certificateMajorId,jdbcType=BIGINT},
+      certificate_search = #{certificateSearch,jdbcType=VARCHAR},
+      certificate_status = #{certificateStatus,jdbcType=BIT},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=VARCHAR},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+</mapper>

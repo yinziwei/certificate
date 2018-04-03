@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cnk.qiye.mapper.CCollogeMapper" >
+
+  <resultMap id="BaseResultMap" type="com.cnk.qiye.pojo.CColloge" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="college_name" property="collegeName" jdbcType="VARCHAR" />
+    <result column="college_desc" property="collegeDesc" jdbcType="VARCHAR" />
+    <result column="college_status" property="collegeStatus" jdbcType="BIT" />
+    <result column="college_sort" property="collegeSort" jdbcType="INTEGER" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, college_name, college_desc, college_status, college_sort, created_time, update_time, 
+    created_by
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_colloge
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from c_colloge
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.cnk.qiye.pojo.CColloge" >
+    insert into c_colloge (id, college_name, college_desc, 
+      college_status, college_sort, created_time, 
+      update_time, created_by)
+    values (#{id,jdbcType=BIGINT}, #{collegeName,jdbcType=VARCHAR}, #{collegeDesc,jdbcType=VARCHAR}, 
+      #{collegeStatus,jdbcType=BIT}, #{collegeSort,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.cnk.qiye.pojo.CColloge" >
+    update c_colloge
+    set college_name = #{collegeName,jdbcType=VARCHAR},
+      college_desc = #{collegeDesc,jdbcType=VARCHAR},
+      college_status = #{collegeStatus,jdbcType=BIT},
+      college_sort = #{collegeSort,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

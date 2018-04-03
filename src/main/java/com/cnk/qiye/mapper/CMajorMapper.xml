@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cnk.qiye.mapper.CMajorMapper" >
+
+  <resultMap id="BaseResultMap" type="com.cnk.qiye.pojo.CMajor" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="major_name" property="majorName" jdbcType="VARCHAR" />
+    <result column="major_desc" property="majorDesc" jdbcType="VARCHAR" />
+    <result column="major_status" property="majorStatus" jdbcType="BIT" />
+    <result column="major_sort" property="majorSort" jdbcType="INTEGER" />
+    <result column="colloge_id" property="collogeId" jdbcType="BIGINT" />
+    <result column="created_time" property="createdTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="created_by" property="createdBy" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, major_name, major_desc, major_status, major_sort, colloge_id, created_time, update_time, 
+    created_by
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_major
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from c_major
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.cnk.qiye.pojo.CMajor" >
+    insert into c_major (id, major_name, major_desc, 
+      major_status, major_sort, colloge_id, 
+      created_time, update_time, created_by
+      )
+    values (#{id,jdbcType=BIGINT}, #{majorName,jdbcType=VARCHAR}, #{majorDesc,jdbcType=VARCHAR}, 
+      #{majorStatus,jdbcType=BIT}, #{majorSort,jdbcType=INTEGER}, #{collogeId,jdbcType=BIGINT}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com.cnk.qiye.pojo.CMajor" >
+    update c_major
+    set major_name = #{majorName,jdbcType=VARCHAR},
+      major_desc = #{majorDesc,jdbcType=VARCHAR},
+      major_status = #{majorStatus,jdbcType=BIT},
+      major_sort = #{majorSort,jdbcType=INTEGER},
+      colloge_id = #{collogeId,jdbcType=BIGINT},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      created_by = #{createdBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
