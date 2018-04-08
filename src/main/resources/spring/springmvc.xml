@@ -18,11 +18,15 @@
 	<!-- 视图解析器  前缀+后缀 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/pages/" />
-		<property name="suffix" value=".jsp" />
+		<property name="prefix" value="/frontPage/" />
+		<property name="suffix" value=".html" />
 	</bean>
 	<!-- 资源映射 防止spring拦截这些资源 -->
-   <mvc:resources location="/static/" mapping="/static/**" />
+   <mvc:resources location="/css/" mapping="/css/**" />
+   <mvc:resources location="/fonts/" mapping="/fonts/**" />
+   <mvc:resources location="/image/" mapping="/image/**" />
+   <mvc:resources location="/js/" mapping="/js/**" />
+   <mvc:resources location="/frontPage/" mapping="/frontPage/**" />
 
 	<!-- 自定义统一异常处理 -->
 <!-- 	<bean class="com.happybuy.manager.exception.CustomAdminUserException"></bean> -->

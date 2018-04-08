@@ -1,0 +1,42 @@
+.footed>li{
+    list-style: none;
+    float: left;
+    margin-left: 40px;
+
+}
+.power{
+    clear: left;
+    margin-left: 165px;
+
+    padding-top: 19px
+
+}
+.footed{
+    margin-left: 83px;
+    margin-top: 50px;
+}
+.induce{
+    border: 1px #edf1f2 solid;
+    height: 600px;
+    width: 450px;
+    margin-right: 157px;
+}
+.cont1{
+    border-bottom: 1px #edf1f2 solid;
+    height: 100px;
+    width: 450px;
+    text-align: center;
+
+    padding-top: 17px
+}
+.cont2{
+
+    height: 230px;
+    width: 450px;
+}
+.floatLeft{
+    float: left;
+}
+.navbar-brand{
+    padding-top: 35px;
+}
