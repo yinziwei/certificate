@@ -1,0 +1,2 @@
+0:0:0:0:0:0:0:1 - - [08/Apr/2018:15:16:01 +0800] "GET /api/verticalNav/colloge HTTP/1.1" 200 1120 http-bio-8080-exec-1 534
+0:0:0:0:0:0:0:1 - - [08/Apr/2018:15:16:02 +0800] "GET /favicon.ico HTTP/1.1" 404 949 http-bio-8080-exec-3 2

@@ -19,6 +19,13 @@
     created_by
   </sql>
   
+  <!-- 查询专业列表 -->
+  <select id="selectList" resultMap="BaseResultMap">
+      select 
+    <include refid="Base_Column_List" />
+    from c_major
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />

@@ -17,6 +17,12 @@
     id, college_name, college_desc, college_status, college_sort, created_time, update_time, 
     created_by
   </sql>
+  <!-- 查询学院列表 -->
+  <select id="selectList" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from c_colloge
+  </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
