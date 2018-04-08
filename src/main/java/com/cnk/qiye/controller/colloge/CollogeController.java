@@ -21,7 +21,7 @@ import com.cnk.qiye.service.colloge.MajorService;
  */
 @RestController
 @RequestMapping("/api")
-public class ConllogeController {
+public class CollogeController {
 
 	//返回的map
 	private static Map<String,Object> collogeMap = new HashMap<>();
