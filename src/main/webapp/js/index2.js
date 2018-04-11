@@ -6,27 +6,23 @@ $(function() {
  $(".direction-0").click(function(){
      $(this).addClass("active").siblings().removeClass("active")
  })
-    /*if(CollegeId!=null)
-    {
 
-    }*/
     /* 这个为方向，其中难易程度和热度都默认为全部，方向会根据上个页面传过来的参数进行*/
     $.ajax({
         type:"POST",
-        url:"/api/verticalNav/majordetail",//
+        url:"/certificate/certificateDirection/majordetail",//
         data:JSON.stringify(),
         contentType:"application/json",
         dataType:"json",
         success:function (data) {
             console.log(data)//返回参数，包括该学院的所有专业
-            if(data.statusCode==200)
-            {
+
                 $("#majordetail").append(
                 " <li class=\"direction-0 floatLeft \"  ><a href=\"#\">全部</a></li>")
                 //这里的全部是否被选中，会根据上个页面传过来的参数进行
                 $.each(data.data, function (i, item) {
                     $("#majordetail").append(
-                        " <li class=\"direction-0 floatLeft active\"  ><a href=\"#\">+item.majorName+</a></li>"
+                        " <li class=\"direction-0 floatLeft \"  ><a href=\"#\">"+item.majorName+"</a></li>"
                     )
 
 
@@ -35,11 +31,11 @@ $(function() {
                /*这里需要写一个函数表示选中样式变色，但未完成*/
 
 
-            }
+
 
         }
     })
-    /*这里是类别页中下面的推荐*/
+    /*这里是类别页中下面的推荐，一次推8个*/
     var dat={};
     var collogeid = $(this).val(collogeId);
     var majorid = $(this).val(majorId);
@@ -51,14 +47,13 @@ $(function() {
     dat.coefficientId = coefficientid;
     $.ajax({
         type:"POST",
-        url:"/api/certificatePush/certificatePhotoDetail",//
+        url:"/certificate/certificatePush/certificatePhotoDetail",//
         data:JSON.stringify(dat),
         contentType:"application/json",
         dataType:"json",
         success:function (data) {
             console.log(data)//返回参数，包括该学院的所有专业
-            if(data.statusCode==200)
-            {
+
                 $("#majordetail").append(
                     " <li class=\"direction-0 floatLeft \"  ><a href=\"#\">全部</a></li>")
                 //这里的全部是否被选中，会根据上个页面传过来的参数进行
@@ -66,7 +61,7 @@ $(function() {
 
                     /*此时要限定出现的个数*/
                     $("#cerficatepush").append(
-                        "<div class=\"allcontent floatLeft\" onclick='enterCerticateDatil("+item.certificateIdId +")'>"+
+                        "<div class=\"allcontent floatLeft\" onclick='enterCerticateDatil("+item.certificateId +")'>"+
                         "                    <a href=\"\">"+
                         "                        <div class=\"pic\">"+
                         "                            <img src="+item.photoAddr+" alt="+item.photoDesc+" class=\"imgcontent\"/>"+
@@ -75,8 +70,8 @@ $(function() {
                         "                            </div>"+
                         "                        </div>"+
                         "                        <div class=\"picontent\"><a href=\"#\">"+
-                        "                            <span> +item.certificateTitle+</span>"+
-                        "                            <p>+item.introduceSmall+</p>"+
+                        "                            <span>" +item.certificateTitle+"</span>"+
+                        "                            <p>"+item.introduceSmall+"</p>"+
                         "                        </a></div>"+
                         "                    </a>"+
                         "                    </div>"
@@ -88,40 +83,11 @@ $(function() {
 
             }
 
-        }
     })
 
 
 })
-/*点击下面的推荐的图片*/
-$(".allcontent").click(function () {
-    //这里需找到点击的到底是哪个图片
-    var data={};
-    var certificateId = $(this).val(certificateId);
-    data.certificateId = certificatedid;
 
-    $.ajax({
-        type:"POST",
-        url:"/api/certificatePush/certificateDetail",//请求一个页面，此时的的地址不知是和第一个页面的地址是不是一样的
-        data:JSON.stringify(data),
-        contentType:"application/json",
-        dataType:"json",
-        success:function (data) {
-            console.log(data)//需要这个图片的id。证书的ID
-            if(data.statusCode==200)
-            {
-                window.parent.location.href = "index3.html?certificatePhoto="+data.data.certificatePhoto+"&certificateIntroduceId="+data.data.certificateIntroduceId+"&meetingId="+meeting.meetingId;//这里缺一个考试信息详情的字段
-
-
-
-            }
-
-        }
-    })
-
-
-
-})
 $("#hotdegree").click(function () {
    /* 这里我需要判断是哪个热度被选中了，然后作为参数传给后台进行刷新，但是我还没有写*/
     var data={};
@@ -130,15 +96,15 @@ $("#hotdegree").click(function () {
 
     $.ajax({
         type:"POST",
-        url:"/api/hotdegree/certificatePhotoDetail",//
+        url:"/certificate/hotdegree/certificatePhotoDetail",//
         data:JSON.stringify(data),
         contentType:"application/json",
         dataType:"json",
         success:function (data) {
             console.log(data)//需要这个图片的id。证书的ID
-            if(data.statusCode==200)
-            {
+
                 $("#cerficatepush").html("");
+            $.each(data.data, function (i, item) {
                 $("#cerficatepush").append(
                     "<div class=\"allcontent floatLeft\" onclick='enterCerticateDatil("+item.certificateIdId +")'>"+
                     "                    <a href=\"\">"+
@@ -155,11 +121,11 @@ $("#hotdegree").click(function () {
                     "                    </a>"+
                     "                    </div>"
                 )
+            })
 
 
 
 
-            }
 
         }
     })
@@ -175,17 +141,17 @@ $("#difforeas").click(function () {
 
     $.ajax({
         type:"POST",
-        url:"/api/difforeasdegree/certificatePhotoDetail",//
+        url:"/ certificate /difforeasdegree/certificatePhotoDetail",//
         data:JSON.stringify(data),
         contentType:"application/json",
         dataType:"json",
         success:function (data) {
             console.log(data)//需要这个图片的id。证书的ID
-            if(data.statusCode==200)
-            {
+
                 $("#cerficatepush").html("");
+            $.each(data.data, function (i, item) {
                 $("#cerficatepush").append(
-                    "<div class=\"allcontent floatLeft\" onclick='enterCerticateDatil("+item.certificateIdId +")'>"+
+                    "<div class=\"allcontent floatLeft\" onclick='enterCerticateDatil("+item.certificateId +")'>"+
                     "                    <a href=\"\">"+
                     "                        <div class=\"pic\">"+
                     "                            <img src="+item.photoAddr+" alt="+item.photoDesc+" class=\"imgcontent\"/>"+
@@ -194,19 +160,19 @@ $("#difforeas").click(function () {
                     "                            </div>"+
                     "                        </div>"+
                     "                        <div class=\"picontent\"><a href=\"#\">"+
-                    "                            <span> +item.certificateTitle+</span>"+
-                    "                            <p>+item.introduceSmall+</p>"+
+                    "                            <span> "+item.certificateTitle+"</span>"+
+                    "                            <p>"+item.introduceSmall+"</p>"+
                     "                        </a></div>"+
                     "                    </a>"+
                     "                    </div>"
                 )
 
-
+        })
 
 
             }
 
-        }
+
     })
 
 

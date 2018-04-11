@@ -14,7 +14,7 @@ function enterCerticateDatil(id) {
         success:function (data) {
             console.log(data);
 
-            window.parent.location.href = "index3.html?certificatePhoto="+data.data.certificatePhoto+"&certificateIntroduceId="+data.data.certificateIntroduceId+"&meetingId="+meeting.meetingId;//这里缺一个考试信息详情的字段
+            window.parent.location.href = "index3.html" 
         }
     })
 }
