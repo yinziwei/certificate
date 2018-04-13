@@ -32,7 +32,7 @@ function submenus(id){
   data.collegeId=id;
    $.ajax({
         type:"POST",
-        url:"/certificate/verticalNav/colloge",//这里需要返回参数，包括学院名，及相应的专业名及专业证书名
+        url:"/major/verticalNavSub/majorDetail",//这里需要返回参数，包括学院名，及相应的专业名及专业证书名
         data:JSON.stringify(data),
         contentType:"application/json",
         dataType:"json",
@@ -43,7 +43,7 @@ function submenus(id){
                 $.each(data.data, function (i, item) {
                     $(".content").append(
 
- "                <li  class=\"childs\" ><a href=\"index2.js\"  >"+item.majorName+"</a></li>"              
+ "                <li  class=\"childs\"  onclick='enterCollegeDatil("+ item.collegeId +")'  ><a href=\"index2.js\"  >"+item.majorName+"</a></li>"              
        )
                     tops+="-20px";
                     $(".content").css("position","absolute");
@@ -62,7 +62,7 @@ $(function () {
   /*左边导航栏*/
     $.ajax({
         type:"POST",
-        url:"/certificate/verticalNav/colloge",//这里需要返回参数，包括学院名，及相应的专业名及专业证书名,一次推6个
+        url:"/college/verticalNav/colloge",//这里需要返回参数，包括学院名，及相应的专业名及专业证书名,一次推6个
         data:JSON.stringify(),
         contentType:"application/json",
         dataType:"json",
@@ -71,7 +71,7 @@ $(function () {
  $.each(data.data, function (i, item) {
                     $("#nav_menus").append(
 
-                        "                <li role=\"presentation\" class=\" nav-content\" onmouseover='submenus("+item.collegeId+")'><a href=\"index2.js\" enterCerticateDatil("+item.collegeId +")'>"+item.collegeName+"</a><ul class=\"content\"></ul></li>"
+                        "                <li role=\"presentation\" class=\" nav-content\" onmouseover='submenus("+item.collegeId+")' onclick='enterCollegeDatil("+item.collegeId +")'><a href=\"index2.js\"  >"+item.collegeName+"</a><ul class=\"content\"></ul></li>"
                     )
                     
 
@@ -83,7 +83,7 @@ $(function () {
      data.photoCategoryId = "1";
     $.ajax({
         type:"POST",
-        url:"/certificate/couselPhoto/certificatePhoto",//一些轮播图，图片类别为轮播图，
+        url:"/certificate/photo/couselPhoto/certificatePhoto",//一些轮播图，图片类别为轮播图，
         data:JSON.stringify(data),
         contentType:"application/json",
         dataType:"json",
@@ -91,7 +91,7 @@ $(function () {
             console.log(data)//传过来的轮播图，一般限制为三个
             $("#listbox").append(
                     "<div class=\"item active\"  onclick='enterCerticateDatil("+data.data[0].certificateId +")'>"+
-                    "                        <img src="+data.data[0].photoAddr+" alt="+data.data[0].photoDesc+">"+
+                    "                        <img src="+data.data[0].certificatephoto+" alt="+data.data[0].certificateTitle+">"+
                     "                        <div class=\"carousel-caption\">"+
                                            data.data[0].photoTitle+
                     "                        </div>"+
@@ -103,7 +103,7 @@ $(function () {
                 $.each(data.data, function (i, item) {
                     $("#listbox").append(
                     "<div class=\"item \"  onclick='enterCerticateDatil("+item.certificateId +")'>"+
-                    "                        <img src="+item.photoAddr+" alt="+item.photoDesc+">"+
+                    "                        <img src="+item.certificatephoto+" alt="+item.certificateTitle+">"+
                     "                        <div class=\"carousel-caption\">"+
                                            item.photoTitle+
                     "                        </div>"+
@@ -123,7 +123,7 @@ $(function () {
     datas.photoCategoryId = "2";
    $.ajax({
         type:"POST",
-        url:"/certificate/certificatePush/certificatePhoto",//一些实例推荐的图片，然后描述，图片类别实例推荐图，一退4次
+        url:"/certificate/indroduce/certificatePush/certificatePhoto",//一些实例推荐的图片，然后描述，图片类别实例推荐图，一退4次
         data:JSON.stringify(datas),
         contentType:"application/json",
         dataType:"json",
@@ -135,7 +135,7 @@ $(function () {
                     "        <div class=\"col-md-3\"   onclick='enterCerticateDatil("+item.certificateId +")'>"+
                     "                <div class=\"single-member effect-2\" style=\"border: 1px #2b333b solid\">"+
                     "             <div class=\"member-image\">"+
-                    "                <img src="+item.photoAddr+" alt="+item.photoDesc+">"+
+                    "                <img src="+item.certificatephoto+" alt="+item.certificateTitle+">"+
                     "            </div>"+
                     "            <div class=\"member-info\">"+
                     "                <h3> "+item.certificateTitle+"</h3>"+

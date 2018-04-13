@@ -18,11 +18,11 @@ $(function() {
             console.log(data)//返回参数，包括该学院的所有专业
 
                 $("#majordetail").append(
-                " <li class=\"direction-0 floatLeft \"  ><a href=\"#\">全部</a></li>")
+                " <li class=\"direction-0 floatLeft \" onclick='enterCollegeDatil("+item.collegeId +")' ><a href=\"#\">全部</a></li>")
                 //这里的全部是否被选中，会根据上个页面传过来的参数进行
                 $.each(data.data, function (i, item) {
                     $("#majordetail").append(
-                        " <li class=\"direction-0 floatLeft \"  ><a href=\"#\">"+item.majorName+"</a></li>"
+                        " <li class=\"direction-0 floatLeft \" onclick='changeCollegeDatil("+item.collegeId +")' ><a href=\"#\">"+item.majorName+"</a></li>"
                     )
 
 
@@ -64,7 +64,7 @@ $(function() {
                         "<div class=\"allcontent floatLeft\" onclick='enterCerticateDatil("+item.certificateId +")'>"+
                         "                    <a href=\"\">"+
                         "                        <div class=\"pic\">"+
-                        "                            <img src="+item.photoAddr+" alt="+item.photoDesc+" class=\"imgcontent\"/>"+
+                        "                            <img src="+item.certificatePhoto+" alt="+item.certificateTitle+" class=\"imgcontent\"/>"+
                         "                            <div class=\"label\">"+
                         /* "                                <label >ios</label>"+*/  //这个标签现在数据库中没有
                         "                            </div>"+
@@ -141,7 +141,7 @@ $("#difforeas").click(function () {
 
     $.ajax({
         type:"POST",
-        url:"/ certificate /difforeasdegree/certificatePhotoDetail",//
+        url:"/ certificate/difforeasdegree/certificatePhotoDetail",//
         data:JSON.stringify(data),
         contentType:"application/json",
         dataType:"json",
